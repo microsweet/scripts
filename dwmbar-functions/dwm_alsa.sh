@@ -7,10 +7,12 @@
 # Dependencies: alsa-utils
 
 dwm_alsa () {
-    VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
+    #VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
+    VOL=$(pamixer --get-volume)
+    IS_MUTE=$(pamixer --get-mute)
     printf "%s" "$SEP1"
     if [ "$IDENTIFIER" = "unicode" ]; then
-        if [ "$VOL" -eq 0 ]; then
+        if [ "$VOL" -eq 0 ] || [ "$IS_MUTE" = "true" ]; then
             printf ""
         elif [ "$VOL" -gt 0 ] && [ "$VOL" -le 33 ]; then
             printf "%s%%" "$VOL"
