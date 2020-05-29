@@ -149,6 +149,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
 #. "$DIR/dwmbar-functions/dwm_date.sh"
+. "$DIR/dwmbar-functions/net.sh"
 
 get_bytes
 
