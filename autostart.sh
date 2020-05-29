@@ -1,8 +1,12 @@
 #!/bin/bash
 
-proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
+#proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
+#if [ $proc_number -le 0 ]; then
+	#/bin/bash ~/scripts/dwm-status.sh &
+#fi
+proc_number=`ps -ef | grep -w dwmbar | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
-	/bin/bash ~/scripts/dwm-status.sh &
+	dwmbar &
 fi
 
 proc_number=`ps -ef | grep -w wp-autochange | grep -v grep|wc -l`
@@ -28,6 +32,11 @@ fi
 proc_number=`ps -ef | grep -w inverse-scroll | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	/bin/bash ~/scripts/inverse-scroll.sh &
+fi
+
+proc_number=`ps -ef | grep -w autolock | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	/bin/bash ~/scripts/autolock.sh &
 fi
 #/bin/bash ~/scripts/setxmodmap-colemak.sh &
 #network-manager-applet
