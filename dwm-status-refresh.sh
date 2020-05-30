@@ -141,7 +141,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_battery.sh"
 #. "$DIR/dwmbar-functions/dwm_mail.sh"
 #. "$DIR/dwmbar-functions/dwm_backlight.sh"
-. "$DIR/dwmbar-functions/dwm_alsa.sh"
+#. "$DIR/dwmbar-functions/dwm_alsa.sh"
 #. "$DIR/dwmbar-functions/dwm_pulse.sh"
 #. "$DIR/dwmbar-functions/dwm_weather.sh"
 #. "$DIR/dwmbar-functions/dwm_vpn.sh"
@@ -149,7 +149,27 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
 #. "$DIR/dwmbar-functions/dwm_date.sh"
-. "$DIR/dwmbar-functions/net.sh"
+#. "$DIR/dwmbar-functions/net.sh"
+
+#. "$DIR/modules/archupdates"
+#. "$DIR/modules/backlight"
+#. "$DIR/modules/battery"
+#. "$DIR/modules/bluetooth"
+. "$DIR/modules/cpuload"
+. "$DIR/modules/cputemp"
+. "$DIR/modules/date"
+#. "$DIR/modules/daypercentage"
+#. "$DIR/modules/disksize"
+#. "$DIR/modules/ethernet"
+#. "$DIR/modules/mpd"
+. "$DIR/modules/networkdowntraffic"
+. "$DIR/modules/networkuptraffic"
+#. "$DIR/modules/publicip"
+. "$DIR/modules/ram"
+#. "$DIR/modules/sunmoon"
+. "$DIR/modules/time"
+#. "$DIR/modules/todo"
+. "$DIR/modules/volume"
 
 get_bytes
 
@@ -158,7 +178,7 @@ vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
 #xsetroot -name "   $(print_mem)M  $vel_recv  $vel_trans $(dwm_alsa) [ $(print_bat) ]$(show_record) $(print_date) "
-xsetroot -name "   $(print_mem)M   $vel_recv  $vel_trans $(dwm_alsa)  $(show_record) $(print_date) "
+xsetroot -name "$(get_load) $(get_cputemp) $(get_ram) $(get_down_traffic) $(get_up_traffic) $(get_date)$(get_time) $(get_volume) "
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes

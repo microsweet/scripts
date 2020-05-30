@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Prints the backlight percentage
+# Requires the light package
+
+
+get_backlight()
+{
+	local PREFIX='ﯧ'
+	echo "$PREFIX $(light | sed 's/\..*//g')%"
+}
+
+get_backlight

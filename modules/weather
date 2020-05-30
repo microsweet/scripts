@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Deps:
+# 	curl
+
+
+get_weather()
+{
+	curl -s v2.wttr.in | grep -e "Weather" | sed 's/C,.*/C/g; s/+//g; s/.*\[0m.//g; s/.//2'
+}
+
+
+if [ $(( 10#$(date +'%S') % 30 )) -eq 0 ]; then
+	get_weather
+fi

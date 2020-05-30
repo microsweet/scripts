@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Prints the total ram and used ram in Mb
+
+get_ram()
+{
+	local PREFIX=' '
+
+	local TOTAL_RAM=$(free -mh --si | awk  {'print $2'} | head -n 2 | tail -1)
+	local USED_RAM=$(free -mh --si | awk  {'print $3'} | head -n 2 | tail -1)
+	local MB="MB"
+
+	#echo "$PREFIX$USED_RAM/$TOTAL_RAM"
+	printf "$PREFIX$USED_RAM/$TOTAL_RAM"
+}
+
+get_ram

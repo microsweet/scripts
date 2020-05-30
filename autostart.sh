@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
-#if [ $proc_number -le 0 ]; then
-	#/bin/bash ~/scripts/dwm-status.sh &
-#fi
-proc_number=`ps -ef | grep -w dwmbar | grep -v grep|wc -l`
+proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
-	dwmbar &
+	/bin/bash ~/scripts/dwm-status.sh &
 fi
+#proc_number=`ps -ef | grep -w dwmbar | grep -v grep|wc -l`
+#if [ $proc_number -le 0 ]; then
+	#dwmbar &
+#fi
 
 proc_number=`ps -ef | grep -w wp-autochange | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
