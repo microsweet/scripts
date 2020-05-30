@@ -50,3 +50,5 @@ proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	~/scripts/autostart_wait.sh &
 fi
+
+xinput --set-prop "pointer:Logitech G903" "libinput Accel Speed" -0.65
