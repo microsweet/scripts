@@ -36,7 +36,7 @@ get_battery()
 			BAT_ICON=$BATTERY_2_ICON
 		fi
 	fi
-	echo "$ICON$BAT_ICON  $capacity%"
+	echo "$ICON$BAT_ICON $capacity%"
 }
 
 get_battery
