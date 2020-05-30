@@ -6,7 +6,7 @@ get_date()
 {
 	local PREFIX=' '
 	#echo "$PREFIX$(date '+%d-%m-%y (%a)')"
-	printf "$PREFIX$(date '+%d-%m-%y (%a)')"
+	printf "$PREFIX$(date '+%Y-%m-%d (%a)')"
 }
 
 get_date
