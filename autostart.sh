@@ -51,4 +51,5 @@ if [ $proc_number -le 0 ]; then
 	~/scripts/autostart_wait.sh &
 fi
 
+start-pulseaudio-x11
 xinput --set-prop "pointer:Logitech G903" "libinput Accel Speed" -0.65
