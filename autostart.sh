@@ -1,5 +1,6 @@
 #!/bin/bash
 
+~/scripts/monitor.sh
 proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	/bin/bash ~/scripts/dwm-status.sh &
@@ -49,6 +50,11 @@ fcitx &
 proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	~/scripts/autostart_wait.sh &
+fi
+
+proc_number=`ps -ef | grep -w blueman-tray | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	blueman-tray &
 fi
 
 start-pulseaudio-x11
