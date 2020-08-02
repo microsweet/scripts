@@ -45,7 +45,7 @@ nm-applet &
 #xfce4-power-manager &
 #xfce4-volumed-pulse &
 #/bin/bash ~/scripts/run-mailsync.sh &
-fcitx & 
+fcitx5 & 
 
 proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
@@ -58,4 +58,4 @@ if [ $proc_number -le 0 ]; then
 fi
 
 start-pulseaudio-x11
-xinput --set-prop "pointer:Logitech G903" "libinput Accel Speed" -0.65
+xinput --set-prop 'pointer:Logitech G502' 'libinput Accel Speed' -0.7
