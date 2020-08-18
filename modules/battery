@@ -36,7 +36,9 @@ get_battery()
 			BAT_ICON=$BATTERY_2_ICON
 		fi
 	fi
-	echo "$ICON$BAT_ICON $capacity%"
+	if [ "$(ls /sys/class/power_supply | grep BAT0)" != "" ]; then
+		echo "$ICON$BAT_ICON $capacity%"
+	fi
 }
 
 get_battery

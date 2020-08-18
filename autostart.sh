@@ -1,5 +1,6 @@
 #!/bin/bash
 
+~/scripts/monitor.sh
 proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	/bin/bash ~/scripts/dwm-status.sh &
@@ -44,12 +45,22 @@ nm-applet &
 #xfce4-power-manager &
 #xfce4-volumed-pulse &
 #/bin/bash ~/scripts/run-mailsync.sh &
-fcitx & 
+fcitx5 & 
 
 proc_number=`ps -ef | grep -w dwm-status | grep -v grep|wc -l`
 if [ $proc_number -le 0 ]; then
 	~/scripts/autostart_wait.sh &
 fi
 
+proc_number=`ps -ef | grep -w blueman-tray | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	blueman-tray &
+fi
+
+proc_number=`ps -ef | grep -w breakNotify | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	~/go/src/notify/breakNotify &
+fi
+
 start-pulseaudio-x11
-xinput --set-prop "pointer:Logitech G903" "libinput Accel Speed" -0.65
+xinput --set-prop 'pointer:Logitech G502' 'libinput Accel Speed' -0.7

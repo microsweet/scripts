@@ -1,18 +1,17 @@
 #!/bin/bash
 
 # Prints out the current up network traffic in MB
-
 get_up_traffic()
 {
 	local PREFIX=' '
-
 	local TRANSMIT1=0
 	local TRANSMIT2=0
 
 	IFACES=$(ip -o link show | awk -F': ' '{print $2}')
 	for IFACE in $IFACES; do
 		if [ $IFACE != "lo" ]; then
-			TRANSMIT1=$(($(ip -s -c link show $IFACE | tail -n1 | cut -d " " -f5) + TRANSMIT1))
+			#TRANSMIT1=$(($(ip -s -c link show $IFACE | tail -n1 | cut -d " " -f5) + TRANSMIT1))
+			TRANSMIT1=$(($(ip -s -c link show $IFACE | sed -n '6p' | cut -d " " -f5) + TRANSMIT1))
 		fi
 	done
 
@@ -21,12 +20,16 @@ get_up_traffic()
 	IFACES=$(ip -o link show | awk -F': ' '{print $2}')
 	for IFACE in $IFACES; do
 	if [ $IFACE != "lo" ]; then
-		TRANSMIT2=$(($(ip -s -c link show $IFACE | tail -n1 | cut -d " " -f5) + TRANSMIT2))
+		#TRANSMIT2=$(($(ip -s -c link show $IFACE | tail -n1 | cut -d " " -f5) + TRANSMIT2))
+		TRANSMIT2=$(($(ip -s -c link show $IFACE | sed -n '6p' | cut -d " " -f5) + TRANSMIT2))
 	fi
 	done
 
-	#echo "$PREFIX$(expr $(expr $TRANSMIT2 - $TRANSMIT1) / 1000)KB/s"
-	printf "$PREFIX$(expr $(expr $TRANSMIT2 - $TRANSMIT1) / 1000)KB/s"
+	if [ $(expr $TRANSMIT2 - $TRANSMIT1) -gt 1000000 ]; then
+		printf "$PREFIX$(expr $(expr $TRANSMIT2 - $TRANSMIT1) / 1000000)M/s"
+	else
+		printf "$PREFIX$(expr $(expr $TRANSMIT2 - $TRANSMIT1) / 1000)KB/s"
+	fi
 }
 
 get_up_traffic
