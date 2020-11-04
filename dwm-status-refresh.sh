@@ -177,9 +177,11 @@ get_bytes
 vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
+netupspeed=`cat ~/scripts/netupspeed.txt | tail -n1`
+netdownspeed=`cat ~/scripts/netdownspeed.txt | tail -n1`
 #xsetroot -name "   $(print_mem)M  $vel_recv  $vel_trans $(dwm_alsa) [ $(print_bat) ]$(show_record) $(print_date) "
 #xsetroot -name "$(get_battery) $(get_load) $(get_cputemp) $(get_ram) $(get_down_traffic) $(get_up_traffic) $(get_date) $(get_time) $(get_volume) "
-xsetroot -name "$(get_battery) $(get_load) $(get_cputemp) $(get_ram) $(get_date) $(get_time) $(get_volume) "
+xsetroot -name "${netupspeed} ${netdownspeed} $(get_battery) $(get_load) $(get_cputemp) $(get_ram) $(get_date) $(get_time) $(get_volume) "
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes

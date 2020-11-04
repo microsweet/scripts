@@ -62,5 +62,15 @@ if [ $proc_number -le 0 ]; then
 	~/go/src/notify/breakNotify &
 fi
 
+
+proc_number=`ps -ef | grep -w upspeed | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	~/scripts/upspeed.sh &
+fi
+proc_number=`ps -ef | grep -w downspeed | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+	~/scripts/downspeed.sh
+fi
+
 start-pulseaudio-x11
 xinput --set-prop 'pointer:Logitech G502' 'libinput Accel Speed' -0.7
