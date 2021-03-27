@@ -38,13 +38,20 @@ old_transmitted_bytes=$transmitted_bytes
 old_time=$now
 
 print_volume() {
-	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
-	if test "$volume" -gt 0
-	then
-		echo -e "\uF028${volume}"
-	else
-		echo -e "Mute"
-	fi
+	#volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+	#if test "$volume" -gt 0
+	#then
+		#echo -e "\uF028${volume}"
+	#else
+		#echo -e "Mute"
+	#fi
+    volume="$(pulsemixer --id sink-1 --get-volume)"
+    ifmute="$(pulsemixer --id sink-1 --get-mute)"
+    if "$ifmute" -eq 0;then
+        echo -e "Mute"
+    else
+        echo -e "\uF028${volume}[2]"
+    fi
 }
 
 print_mem(){
