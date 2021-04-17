@@ -91,6 +91,12 @@ if [ $proc_number -le 0 ]; then
     LANG=zh_CN /usr/bin/remmina --icon &
 fi
 
+proc_number=`ps -ef | grep -w dunst | grep -v grep|wc -l`
+echo 'dunst'
+if [ $proc_number -le 0 ]; then
+    LANG=zh_CN /usr/bin/dunst &
+fi
+
 start-pulseaudio-x11
 xinput --set-prop 'pointer:Logitech G502' 'libinput Accel Speed' -0.75
 #设置声卡默认输出
