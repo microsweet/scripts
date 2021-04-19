@@ -94,7 +94,13 @@ fi
 proc_number=`ps -ef | grep -w dunst | grep -v grep|wc -l`
 echo 'dunst'
 if [ $proc_number -le 0 ]; then
-    LANG=zh_CN /usr/bin/dunst &
+    /usr/bin/dunst &
+fi
+
+proc_number=`ps -ef | grep -w mobmonitor | grep -v grep|wc -l`
+echo 'mobmonitor'
+if [ $proc_number -le 0 ]; then
+    ~/scripts/mobmonitor ttyUSB0 &
 fi
 
 start-pulseaudio-x11
