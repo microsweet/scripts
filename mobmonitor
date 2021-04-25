@@ -23,7 +23,7 @@ def getMsg():
     message = os.popen('s-tui -j').read()
     jsonmsg = json.loads(message)
 
-    cpuTemp = jsonmsg['Temp']['Smbusmaster0,0']
+    cpuTemp = jsonmsg['Temp']['Tctl,0']
     cpuUtil = jsonmsg['Util']['Avg']
     cpuFreq = str(round(float(jsonmsg['Frequency']['Avg'])/1000, 2))
     cpuFan = jsonmsg['Fan']['nct6795,1']
