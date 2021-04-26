@@ -38,13 +38,20 @@ old_transmitted_bytes=$transmitted_bytes
 old_time=$now
 
 print_volume() {
-	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
-	if test "$volume" -gt 0
-	then
-		echo -e "\uF028${volume}"
-	else
-		echo -e "Mute"
-	fi
+	#volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+	#if test "$volume" -gt 0
+	#then
+		#echo -e "\uF028${volume}"
+	#else
+		#echo -e "Mute"
+	#fi
+    volume="$(pulsemixer --id sink-1 --get-volume)"
+    ifmute="$(pulsemixer --id sink-1 --get-mute)"
+    if "$ifmute" -eq 0;then
+        echo -e "Mute"
+    else
+        echo -e "\uF028${volume}[2]"
+    fi
 }
 
 print_mem(){
@@ -152,7 +159,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/net.sh"
 
 #. "$DIR/modules/archupdates"
-#. "$DIR/modules/backlight"
+. "$DIR/modules/backlight"
 . "$DIR/modules/battery"
 #. "$DIR/modules/bluetooth"
 . "$DIR/modules/cpuload"
@@ -181,7 +188,7 @@ netupspeed=`cat ~/scripts/netupspeed.txt | tail -n1`
 netdownspeed=`cat ~/scripts/netdownspeed.txt | tail -n1`
 #xsetroot -name "   $(print_mem)M  $vel_recv  $vel_trans $(dwm_alsa) [ $(print_bat) ]$(show_record) $(print_date) "
 #xsetroot -name "$(get_battery) $(get_load) $(get_cputemp) $(get_ram) $(get_down_traffic) $(get_up_traffic) $(get_date) $(get_time) $(get_volume) "
-xsetroot -name "${netupspeed} ${netdownspeed} $(get_battery) $(get_load) $(get_cputemp) $(get_ram) $(get_date) $(get_time) $(get_volume) "
+xsetroot -name "${netupspeed} ${netdownspeed} $(get_battery) $(get_backlight) $(get_load) $(get_cputemp) $(get_ram) $(get_date) $(get_time) $(get_volume) "
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes
