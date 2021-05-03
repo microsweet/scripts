@@ -74,6 +74,11 @@ if [ $proc_number -le 0 ]; then
 fi
 
 
+proc_number=`ps -ef | grep -w redshift | grep -v grep|wc -l`
+if [ $proc_number -le 0 ]; then
+    redshift &
+fi
+
 proc_number=`ps -ef | grep -w upspeed | grep -v grep|wc -l`
 echo 'speed'
 if [ $proc_number -le 0 ]; then
