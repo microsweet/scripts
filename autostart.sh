@@ -103,6 +103,12 @@ if [ $proc_number -le 0 ]; then
     ~/scripts/mobmonitor ttyUSB0 &
 fi
 
+proc_number=`ps -ef | grep -w xwinwrap | grep -v grep|wc -l`
+echo 'xwinwrap'
+if [ $proc_number -le 0 ]; then
+    mkfifo /tmp/wallpaper; xwinwrap -b -fs -sp -nf -ov -- mplayer -shuffle -slave -input file=/tmp/wallpaper -nosound -loop 0 -wid WID -nolirc ~/.config/wallpaper/scene_01.mp4 &
+fi
+
 start-pulseaudio-x11
 xinput --set-prop 'pointer:Logitech G502' 'libinput Accel Speed' -0.75
 #设置声卡默认输出
